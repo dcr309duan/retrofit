@@ -1,9 +1,9 @@
-import net.ltgt.gradle.errorprone.CheckSeverity
+import net.ltgt.gradle.errorprone.*
 import org.gradle.internal.jvm.Jvm
 
 buildscript {
   ext.versions = [
-      'kotlin': '1.3.50',
+      'kotlin': '1.3.72',
       'okhttp': '3.14.7',
       'protobuf': '3.10.0',
       'jaxb': '2.3.1',
@@ -38,7 +38,7 @@ buildscript {
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
     classpath 'net.ltgt.gradle:gradle-errorprone-plugin:0.8.1'
-    classpath 'com.android.tools.build:gradle:3.6.2'
+    classpath 'com.android.tools.build:gradle:3.6.3'
     classpath 'com.vanniktech:gradle-maven-publish-plugin:0.9.0'
     classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.12'
     classpath 'ru.vyarus:gradle-animalsniffer-plugin:1.5.0'
@@ -64,6 +64,7 @@ subprojects {
     apply plugin: 'net.ltgt.errorprone'
 
     dependencies {
+      //noinspection GradleDynamicVersion
       errorproneJavac 'com.google.errorprone:javac:9+181-r4173-1'
       errorprone 'com.google.errorprone:error_prone_core:2.3.3'
     }
@@ -72,7 +73,7 @@ subprojects {
       task.options.encoding = 'UTF-8'
       task.sourceCompatibility = JavaVersion.VERSION_1_8
       task.targetCompatibility = JavaVersion.VERSION_1_8
-
+x
       task.options.errorprone {
         excludedPaths = '.*/build/generated/source/proto/.*'
         check('MissingFail', CheckSeverity.ERROR)
